@@ -1,55 +1,34 @@
 const express = require('express');
 const router = express.Router();
-const Student = require('../models/Student');
+const Student = require('../models/student'); // Importa o modelo de aluno
 
-// Obter todos os alunos
+// Rota para listar todos os alunos
 router.get('/', async (req, res) => {
   try {
-    const students = await Student.find();
-    res.json(students);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const students = await Student.find(); // Busca todos os alunos no banco de dados
+    res.status(200).json(students); // Retorna os alunos encontrados
+  } catch (err) {
+    res.status(500).json({ message: 'Erro ao buscar alunos', error: err.message });
   }
 });
 
-// Adicionar um novo aluno
+// Rota para criar um novo aluno
 router.post('/', async (req, res) => {
-  const { name, email, phone } = req.body;
-
   try {
-    const newStudent = await Student.create({ name, email, phone });
-    res.status(201).json(newStudent);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+    const { name, email, phone, status, paymentDue } = req.body;
 
-// Atualizar um aluno
-router.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const { name, email, phone, status, paymentDue } = req.body;
+    const newStudent = new Student({
+      name,
+      email,
+      phone,
+      status,
+      paymentDue,
+    });
 
-  try {
-    const updatedStudent = await Student.findByIdAndUpdate(
-      id,
-      { name, email, phone, status, paymentDue },
-      { new: true }
-    );
-    res.json(updatedStudent);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-// Deletar um aluno
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    await Student.findByIdAndDelete(id);
-    res.json({ message: 'Aluno deletado com sucesso!' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const savedStudent = await newStudent.save(); // Salva o aluno no banco de dados
+    res.status(201).json(savedStudent); // Retorna o aluno criado
+  } catch (err) {
+    res.status(400).json({ message: 'Erro ao criar aluno', error: err.message });
   }
 });
 

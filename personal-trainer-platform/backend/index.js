@@ -1,31 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
-
-const studentRoutes = require('./routes/studentRoutes');
-const notificationRoutes = require('./routes/notificationRoutes');
-
+const studentRoutes = require('./routes/studentRoutes'); // Certifique-se de que o caminho está correto
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middlewares
-app.use(cors());
+// Middleware para processar JSON
 app.use(express.json());
 
+// Registrando a rota '/students'
+app.use('/students', studentRoutes);
+
 // Conexão com o MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Conectado ao MongoDB com sucesso!'))
-  .catch((err) => {
-    console.error('Erro ao conectar ao MongoDB:', err.message);
-    process.exit(1);
-  });
+mongoose.connect('mongodb+srv://Pionne:97795226@cluster0.rw9vw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('Conectado ao MongoDB'))
+  .catch(err => console.log('Erro ao conectar ao MongoDB:', err));
 
-// Rotas
-app.use('/api/students', studentRoutes);
-app.use('/api/notifications', notificationRoutes);
-
-app.get('/', (req, res) => res.send('API funcionando!'));
-
-// Inicia o servidor
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+// Iniciando o servidor
+app.listen(5000, () => {
+  console.log('Servidor rodando na porta 5000');
+});
