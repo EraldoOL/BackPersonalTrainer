@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');  // Importe o CORS
 const studentRoutes = require('./routes/studentRoutes'); // Certifique-se de que o caminho está correto
+
 const app = express();
+
+// Middleware para permitir requisições de diferentes origens (CORS)
+app.use(cors());  // Adiciona o middleware CORS
 
 // Middleware para processar JSON
 app.use(express.json());
