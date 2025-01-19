@@ -53,33 +53,21 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, status, paymentDue } = req.body;
-
-    // Verificação de dados obrigatórios
-    if (!name || !email || !phone || !status || !paymentDue) {
-      return res.status(400).json({ message: 'Todos os campos são obrigatórios!' });
-    }
-
-    // Garantir que paymentDue seja uma data válida
-    const formattedPaymentDue = new Date(paymentDue);
-
-    // Caso a data seja inválida
-    if (isNaN(formattedPaymentDue.getTime())) {
-      return res.status(400).json({ message: 'Data de pagamento inválida!' });
-    }
+    console.log('Dados recebidos:', req.body); // Verifique os dados recebidos no backend
 
     const newStudent = new Student({
       name,
       email,
       phone,
       status,
-      paymentDue: formattedPaymentDue,
+      paymentDue,
     });
 
     const savedStudent = await newStudent.save(); // Salva o aluno no banco de dados
     res.status(201).json(savedStudent); // Retorna o aluno criado
   } catch (err) {
-    console.error('Erro ao criar aluno:', err);
-    res.status(500).json({ message: 'Erro ao criar aluno', error: err.message });
+    console.error('Erro ao criar aluno:', err.message); // Log do erro no backend
+    res.status(400).json({ message: 'Erro ao criar aluno', error: err.message });
   }
 });
 
