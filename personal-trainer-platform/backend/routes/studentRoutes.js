@@ -49,6 +49,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Rota para deletar um aluno pelo ID
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params; // Obtém o ID da URL
+    const deletedStudent = await Student.findByIdAndDelete(id); // Deleta o aluno pelo ID
+
+    if (!deletedStudent) {
+      return res.status(404).json({ message: 'Aluno não encontrado' });
+    }
+
+    res.status(200).json({ message: 'Aluno deletado com sucesso' });
+  } catch (err) {
+    res.status(500).json({ message: 'Erro ao deletar aluno', error: err.message });
+  }
+});
+
 // Rota para criar um novo aluno
 router.post('/', async (req, res) => {
   try {
