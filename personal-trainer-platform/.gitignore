@@ -1,0 +1,13 @@
+# Ignorar arquivos de ambiente
+.env
+
+# Ignorar dependências
+node_modules/
+
+# Ignorar build
+dist/
+build/
+
+# Ignorar arquivos temporários
+*.log
+.DS_Store
