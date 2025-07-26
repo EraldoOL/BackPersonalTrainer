@@ -1,12 +1,11 @@
 /*const express = require('express');
 const router = express.Router();
-const Student = require('../models/student'); // Importa o modelo de aluno
+const Student = require('../models/student');
 
-// Rota para listar todos os alunos
 router.get('/', async (req, res) => {
   try {
-    const students = await Student.find(); // Busca todos os alunos no banco de dados
-    res.status(200).json(students); // Retorna os alunos encontrados
+    const students = await Student.find();
+    res.status(200).json(students);
   } catch (err) {
     res.status(500).json({ message: 'Erro ao buscar alunos', error: err.message });
   }
@@ -26,7 +25,7 @@ router.post('/', async (req, res) => {
     });
 
     const savedStudent = await newStudent.save(); // Salva o aluno no banco de dados
-    res.status(201).json(savedStudent); // Retorna o aluno criado
+    res.status(201).json(savedStudent);
   } catch (err) {
     res.status(400).json({ message: 'Erro ao criar aluno', error: err.message });
   }
@@ -37,24 +36,21 @@ module.exports = router;*/
 
 const express = require('express');
 const router = express.Router();
-const Student = require('../models/student'); // Importa o modelo de aluno
+const Student = require('../models/student');
 
-// Rota para listar todos os alunos
 router.get('/', async (req, res) => {
   try {
-    const students = await Student.find(); // Busca todos os alunos no banco de dados
-    res.status(200).json(students); // Retorna os alunos encontrados
+    const students = await Student.find();
+    res.status(200).json(students);
   } catch (err) {
     res.status(500).json({ message: 'Erro ao buscar alunos', error: err.message });
   }
 });
 
-// Rota para deletar um aluno pelo ID
 router.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Obtém o ID da URL
-    const deletedStudent = await Student.findByIdAndDelete(id); // Deleta o aluno pelo ID
-
+    const { id } = req.params;
+    const deletedStudent = await Student.findByIdAndDelete(id);
     if (!deletedStudent) {
       return res.status(404).json({ message: 'Aluno não encontrado' });
     }
@@ -65,11 +61,10 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Rota para criar um novo aluno
 router.post('/', async (req, res) => {
   try {
     const { name, email, phone, status, paymentDue } = req.body;
-    console.log('Dados recebidos:', req.body); // Verifique os dados recebidos no backend
+    console.log('Dados recebidos:', req.body);
 
     const newStudent = new Student({
       name,
@@ -79,10 +74,10 @@ router.post('/', async (req, res) => {
       paymentDue,
     });
 
-    const savedStudent = await newStudent.save(); // Salva o aluno no banco de dados
-    res.status(201).json(savedStudent); // Retorna o aluno criado
+    const savedStudent = await newStudent.save();
+    res.status(201).json(savedStudent);
   } catch (err) {
-    console.error('Erro ao criar aluno:', err.message); // Log do erro no backend
+    console.error('Erro ao criar aluno:', err.message);
     res.status(400).json({ message: 'Erro ao criar aluno', error: err.message });
   }
 });

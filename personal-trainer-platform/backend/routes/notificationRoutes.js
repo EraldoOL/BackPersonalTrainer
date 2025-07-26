@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-// Mock de avisos (substituir por integração com banco de dados ou notificações reais)
 let notifications = [];
 
-// Obter todos os avisos
 router.get('/', (req, res) => {
   res.json(notifications);
 });
 
-// Criar um aviso
 router.post('/', (req, res) => {
   const { title, message, date } = req.body;
 
@@ -19,7 +16,6 @@ router.post('/', (req, res) => {
   res.status(201).json(newNotification);
 });
 
-// Deletar um aviso
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
