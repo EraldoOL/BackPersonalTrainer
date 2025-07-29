@@ -3,11 +3,11 @@
 
 # BackPersonalTrainer
 
-**BackPersonalTrainer** é o backend robusto e escalável de um sistema completo para gerenciamento de informações pessoais e rotinas de treino, integrando-se perfeitamente ao frontend [FrontPersonal](https://github.com/EraldoOL/FrontPersonal). Este backend foi arquitetado para fornecer uma API eficiente, segura e facilmente extensível, possibilitando operações sofisticadas de CRUD, autenticação e gerenciamento de dados, com foco em performance, manutenibilidade e boas práticas de desenvolvimento profissional.
+**BackPersonalTrainer** é o backend robusto e escalável de um sistema completo para gerenciamento de informações pessoais e integrando-se perfeitamente ao frontend [FrontPersonal](https://github.com/EraldoOL/FrontPersonal). Este backend foi arquitetado para fornecer uma API eficiente, segura e facilmente extensível, possibilitando operações sofisticadas de CRUD, autenticação e gerenciamento de dados, com foco em performance, manutenibilidade e boas práticas de desenvolvimento profissional.
 
 ## Propósito do Projeto
 
-O objetivo do BackPersonalTrainer é servir como a espinha dorsal da aplicação, centralizando toda a lógica de negócio, persistência de dados e políticas de segurança. Ele provê serviços RESTful para manipulação de usuários, treinos, rotinas, métricas e demais dados relevantes ao contexto de um sistema de acompanhamento pessoal, seja para uso em academias, consultorias fitness ou auto-gestão.
+O objetivo do BackPersonalTrainer é servir como a espinha dorsal da aplicação, centralizando toda a lógica de negócio, persistência de dados e políticas de segurança. Ele provê serviços RESTful para manipulação de usuários, cadastros e demais dados relevantes ao contexto de um sistema de acompanhamento pessoal, seja para uso em academias, consultorias fitness ou auto-gestão.
 
 ## Principais Funcionalidades
 
